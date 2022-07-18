@@ -8,10 +8,34 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "Control",
+"class": "CSVEditor",
+"language": "GDScript",
+"path": "res://addons/file-editor/scripts/CSVEditor.gd"
+}, {
+"base": "HTTPRequest",
+"class": "GoogleTranslateAPI",
+"language": "GDScript",
+"path": "res://addons/file-editor/scripts/GoogleTranslatorAPI.gd"
+} ]
+_global_script_class_icons={
+"CSVEditor": "",
+"GoogleTranslateAPI": ""
+}
+
 [application]
 
 config/name="2GirlsNovel"
 config/icon="res://icon.png"
+
+[autoload]
+
+LastOpenedFiles="*res://addons/file-editor/scripts/LastOpenedFiles.gd"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/file-editor/plugin.cfg" )
 
 [physics]
 

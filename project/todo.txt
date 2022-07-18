@@ -1,0 +1,8 @@
+TO-DO:
+- Создать архитектуру проекта
+DONE:
++ Создать проект
+NOTES:
+• ы
+• Custom event system: https://www.reddit.com/r/godot/comments/g7a4mg/signals_are_great_but_why_i_built_a_custom_event/
+• Godot File Editor: https://github.com/fenix-hub/godot-engine.file-editor
