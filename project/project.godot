@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "GoogleTranslateAPI",
 "language": "GDScript",
 "path": "res://addons/file-editor/scripts/GoogleTranslatorAPI.gd"
+}, {
+"base": "Node2D",
+"class": "SceneController",
+"language": "GDScript",
+"path": "res://src/scenes/SceneController.gd"
 } ]
 _global_script_class_icons={
 "CSVEditor": "",
-"GoogleTranslateAPI": ""
+"GoogleTranslateAPI": "",
+"SceneController": ""
 }
 
 [application]

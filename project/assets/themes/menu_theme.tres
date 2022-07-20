@@ -1,6 +1,7 @@
-[gd_resource type="Theme" load_steps=8 format=2]
+[gd_resource type="Theme" load_steps=10 format=2]
 
 [ext_resource path="res://assets/fonts/BigNoodleTitlingCyr.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://assets/fonts/KarmaSuture.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
 size = 60
@@ -17,6 +18,10 @@ font_data = ExtResource( 1 )
 
 [sub_resource type="StyleBoxEmpty" id=6]
 
+[sub_resource type="DynamicFont" id=7]
+size = 72
+font_data = ExtResource( 2 )
+
 [resource]
 Button/colors/font_color = Color( 1, 1, 1, 1 )
 Button/colors/font_color_disabled = Color( 1, 1, 1, 0.25098 )
@@ -30,3 +35,4 @@ Button/styles/focus = SubResource( 3 )
 Button/styles/hover = SubResource( 4 )
 Button/styles/normal = SubResource( 5 )
 Button/styles/pressed = SubResource( 6 )
+Label/fonts/font = SubResource( 7 )

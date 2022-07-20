@@ -7,7 +7,7 @@ const halfAlphaColor := Color(1.0, 1.0, 1.0, 0.5)
 const menuButtonColor := Color(1.0, 1.0, 1.0, 1.0)
 const menuButtonSelectColor := Color(0.0, 1.0, 1.0, 1.0)
 
-# ---------- OBJECTS ----------
+# ---------- CONSTANT OBJECTS ----------
 
 #var projectileDictionary : Dictionary = { }
 var buttonFont : DynamicFont

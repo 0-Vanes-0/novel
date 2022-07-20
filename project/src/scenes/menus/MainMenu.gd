@@ -1,5 +1,6 @@
 extends Control
 
+onready var loadingLabel := $LoadingLabel
 onready var vBox := $VBoxContainer
 onready var playButton := $VBoxContainer/PlayButton
 onready var optionsButton := $VBoxContainer/OptionsButton
@@ -10,8 +11,13 @@ onready var hasFocusButtons := false
 
 
 func _ready() -> void:
-	Preloader.loadEverything()
 	get_viewport().connect("gui_focus_changed", self, "onFocusChanged")
+	loadingLabel.visible = true
+	vBox.visible = false
+	Preloader.call_deferred("loadEverything")
+	Global.printInfo([self, yield(Preloader, "loadingDone_")]) # yield паузит этот код, пока не получит loadingDone_ от Preloader
+	loadingLabel.visible = false
+	vBox.visible = true
 
 
 func onFocusChanged(control : Control) -> void:
@@ -19,7 +25,7 @@ func onFocusChanged(control : Control) -> void:
 
 
 func _on_PlayButton_pressed() -> void:
-	pass # Replace with function body.
+	get_tree().change_scene_to(Preloader.sceneController)
 
 
 func _on_OptionsButton_pressed() -> void:
@@ -43,11 +49,11 @@ func _on_QuitButton_mouse_entered() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if(event.is_action("ui_cancel")):
+	if(event.is_action_pressed("ui_cancel")):
 		get_tree().quit(0)
-	if(!hasFocusButtons and event.is_action("ui_down")):
+	if(!hasFocusButtons and event.is_action_pressed("ui_down")):
 		quitButton.grab_focus() # На самом деле будет выбрана playButton
-	if(!hasFocusButtons and event.is_action("ui_up")):
+	if(!hasFocusButtons and event.is_action_pressed("ui_up")):
 		playButton.grab_focus() # На самом деле будет выбрана quitButton
 
 

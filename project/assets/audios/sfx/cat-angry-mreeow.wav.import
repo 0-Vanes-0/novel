@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/cat-angry-mreeow.wav-8ba2ad6c6411981f82c6407caa525b75.sample"
+
+[deps]
+
+source_file="res://assets/audios/sfx/cat-angry-mreeow.wav"
+dest_files=[ "res://.import/cat-angry-mreeow.wav-8ba2ad6c6411981f82c6407caa525b75.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

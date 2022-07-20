@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/objects/AudioController.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/scenes/SceneController.gd" type="Script" id=2]
+[ext_resource path="res://assets/themes/menu_theme.tres" type="Theme" id=3]
+
+[node name="SceneController" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="CurrentScene" type="Control" parent="."]
+
+[node name="Label" type="Label" parent="CurrentScene"]
+margin_right = 40.0
+margin_bottom = 14.0
+theme = ExtResource( 3 )
+text = "Здесь пока ничего нет.
+Можете нажимать Enter, чтобы были звуки котеек~"
+
+[node name="SoundController" parent="." instance=ExtResource( 1 )]

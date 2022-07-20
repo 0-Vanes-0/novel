@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Outer Wilds - Шпат (Feldspar).mp3-e1cc10ece8cf2571622d6c9f159dcee8.mp3str"
+
+[deps]
+
+source_file="res://assets/audios/music/Outer Wilds - Шпат (Feldspar).mp3"
+dest_files=[ "res://.import/Outer Wilds - Шпат (Feldspar).mp3-e1cc10ece8cf2571622d6c9f159dcee8.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
