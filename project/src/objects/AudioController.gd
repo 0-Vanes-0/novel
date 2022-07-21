@@ -6,7 +6,6 @@ onready var musicPlayer := $MusicPlayer
 
 func _ready() -> void:
 	musicPlayer.stream = Preloader.testMusic
-	musicPlayer.volume_db = -10.0
 	musicPlayer.play()
 
 
@@ -25,4 +24,4 @@ func playSound(sound : AudioStream):
 func getRandomSound() -> AudioStream:
 	randomize()
 	var array = [Preloader.testSound1, Preloader.testSound2, Preloader.testSound3, Preloader.testSound4]
-	return array[rand_range(0, 3)]
+	return array[randi() % 4]

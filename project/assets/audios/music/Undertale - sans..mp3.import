@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/Undertale - sans..mp3-ebb70851f69f41739b7c6c21001ba883.mp3str"
+
+[deps]
+
+source_file="res://assets/audios/music/Undertale - sans..mp3"
+dest_files=[ "res://.import/Undertale - sans..mp3-ebb70851f69f41739b7c6c21001ba883.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

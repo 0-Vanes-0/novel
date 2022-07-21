@@ -4,6 +4,7 @@ signal loadingDone_(text)
 
 var mainMenu : PackedScene
 var sceneController : PackedScene
+var mainScene : PackedScene
 
 var overwatchFontData : DynamicFontData
 var pixelFontData : DynamicFontData
@@ -15,11 +16,14 @@ var testSound2 : AudioStream
 var testSound3 : AudioStream
 var testSound4 : AudioStream
 
+var testBackground : Texture
+
 
 
 func loadEverything():
 	mainMenu = preloadFrom("res://src/scenes/menus/MainMenu.tscn")
 	sceneController = preloadFrom("res://src/scenes/SceneController.tscn")
+	mainScene = preloadFrom("res://src/scenes/MainScene.tscn")
 	
 	overwatchFontData = preloadFrom("res://assets/fonts/BigNoodleTitlingCyr.ttf")
 	pixelFontData = preloadFrom("res://assets/fonts/KarmaSuture.ttf")
@@ -32,6 +36,8 @@ func loadEverything():
 	testSound2 = preloadFrom("res://assets/audios/sfx/cat-angry-mreeow.wav")
 	testSound3 = preloadFrom("res://assets/audios/sfx/cat-mrrr-louder.wav")
 	testSound4 = preloadFrom("res://assets/audios/sfx/cat-muuaaw.wav")
+	
+	testBackground = preloadFrom("res://assets/sprites/backgrounds/dani_bedroom.jpg")
 	
 	Config.fillConstants()
 	emit_signal("loadingDone_", "Loading success!")

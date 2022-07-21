@@ -18,6 +18,7 @@ func _ready() -> void:
 	Global.printInfo([self, yield(Preloader, "loadingDone_")]) # yield паузит этот код, пока не получит loadingDone_ от Preloader
 	loadingLabel.visible = false
 	vBox.visible = true
+	$AudioStreamPlayer.play()
 
 
 func onFocusChanged(control : Control) -> void:
