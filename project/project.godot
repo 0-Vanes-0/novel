@@ -23,11 +23,35 @@ _global_script_classes=[ {
 "class": "SceneController",
 "language": "GDScript",
 "path": "res://src/scenes/SceneController.gd"
+}, {
+"base": "Reference",
+"class": "SceneLexer",
+"language": "GDScript",
+"path": "res://src/parser/SceneLexer.gd"
+}, {
+"base": "Reference",
+"class": "SceneParser",
+"language": "GDScript",
+"path": "res://src/parser/SceneParser.gd"
+}, {
+"base": "Control",
+"class": "ScenePlayer",
+"language": "GDScript",
+"path": "res://src/scenes/ScenePlayer.gd"
+}, {
+"base": "Reference",
+"class": "SceneTranspiler",
+"language": "GDScript",
+"path": "res://src/parser/SceneTranspiler.gd"
 } ]
 _global_script_class_icons={
 "CSVEditor": "",
 "GoogleTranslateAPI": "",
-"SceneController": ""
+"SceneController": "",
+"SceneLexer": "",
+"SceneParser": "",
+"ScenePlayer": "",
+"SceneTranspiler": ""
 }
 
 [application]

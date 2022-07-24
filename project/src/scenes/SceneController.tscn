@@ -7,9 +7,9 @@
 [node name="SceneController" type="Node2D"]
 script = ExtResource( 2 )
 
-[node name="CurrentScene" type="Control" parent="."]
+[node name="ScenePlayerNode" type="Control" parent="."]
 
-[node name="Label" type="Label" parent="CurrentScene"]
+[node name="Label" type="Label" parent="ScenePlayerNode"]
 margin_right = 40.0
 margin_bottom = 14.0
 theme = ExtResource( 3 )

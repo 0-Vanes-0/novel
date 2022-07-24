@@ -2,20 +2,24 @@ extends Node
 
 # ---------- CONSTANTS ----------
 
-const alphaColor := Color(0.0, 0.0, 0.0, 0.0)
-const halfAlphaColor := Color(1.0, 1.0, 1.0, 0.5)
-const menuButtonColor := Color(1.0, 1.0, 1.0, 1.0)
-const menuButtonSelectColor := Color(0.0, 1.0, 1.0, 1.0)
+const BUTTONS := {
+	UP = "ui_up",
+	DOWN = "ui_down",
+	LEFT = "ui_left",
+	RIGHT = "ui_right",
+	ENTER = "ui_accept",
+	ESCAPE = "ui_cancel",
+}
 
 # ---------- CONSTANT OBJECTS ----------
 
 #var projectileDictionary : Dictionary = { }
-var buttonFont : DynamicFont
-
-func fillConstants():
-	buttonFont = DynamicFont.new()
-	buttonFont.font_data = Preloader.overwatchFontData
-	buttonFont.size = 40
+#var buttonFont : DynamicFont
+#
+#func fillConstants():
+#	buttonFont = DynamicFont.new()
+#	buttonFont.font_data = Preloader.overwatchFontData
+#	buttonFont.size = 40
 #	buttonFont.extra_spacing_top = Global.buttonHeight / 10.0
 
 # ---------- FUNTIONS ----------
@@ -52,5 +56,5 @@ func fillConstants():
 #		proj.damage = projType.get("damage")
 #		return proj
 #	else:
-#		Global.printError([self, "projectileDictionary has not key=", nameOfProj])
+#		Global.error([self, "projectileDictionary has not key=", nameOfProj])
 #		return null

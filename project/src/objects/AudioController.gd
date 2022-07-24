@@ -1,27 +1,27 @@
 extends Node
 
-onready var musicPlayer := $MusicPlayer
+onready var music_player := $MusicPlayer as AudioStreamPlayer
 
 
 
 func _ready() -> void:
-	musicPlayer.stream = Preloader.testMusic
-	musicPlayer.play()
+	music_player.stream = Preloader.test_music
+	music_player.play()
 
 
 func _input(event: InputEvent) -> void:
-	if(event.is_action_pressed("ui_accept")):
-		playSound(getRandomSound())
+	if(event.is_action_pressed(Config.BUTTONS.ENTER)):
+		play_sound(_get_random_sound())
 
 
-func playSound(sound : AudioStream):
-	var soundPlayer : AudioStreamPlayer = Preloader.soundPlayer.instance()
-	soundPlayer.stream = sound
-	soundPlayer.volume_db = -1.0
-	self.add_child(soundPlayer)
+func play_sound(sound: AudioStream):
+	var sound_player: AudioStreamPlayer = Preloader.sound_player.instance()
+	sound_player.stream = sound
+	sound_player.volume_db = -1.0
+	self.add_child(sound_player)
 
 
-func getRandomSound() -> AudioStream:
+func _get_random_sound() -> AudioStream:
 	randomize()
-	var array = [Preloader.testSound1, Preloader.testSound2, Preloader.testSound3, Preloader.testSound4]
+	var array = [Preloader.test_sound1, Preloader.test_sound2, Preloader.test_sound3, Preloader.test_sound4]
 	return array[randi() % 4]

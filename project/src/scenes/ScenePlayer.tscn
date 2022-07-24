@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://src/scenes/MainScene.gd" type="Script" id=1]
-[ext_resource path="res://src/objects/textbox/TextBox.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/scenes/ScenePlayer.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/backgrounds/dani_bedroom.jpg" type="Texture" id=2]
 [ext_resource path="res://src/objects/CharacterDisplayer.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/sprites/backgrounds/dani_bedroom.jpg" type="Texture" id=4]
+[ext_resource path="res://src/objects/textbox/TextBox.tscn" type="PackedScene" id=4]
 
 [node name="MainScene" type="Control"]
 anchor_right = 1.0
@@ -14,13 +14,13 @@ script = ExtResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-texture = ExtResource( 4 )
+texture = ExtResource( 2 )
 flip_h = true
 flip_v = true
 
 [node name="CharacterDisplayer" parent="." instance=ExtResource( 3 )]
 
-[node name="TextBox" parent="." instance=ExtResource( 2 )]
+[node name="TextBox" parent="." instance=ExtResource( 4 )]
 anchor_top = 0.0
 anchor_bottom = 0.0
 margin_top = 784.0

@@ -2,83 +2,84 @@ extends Node
 
 # ---------- VARIABLES ----------
 
-var isGamePaused : bool
-var screenWidth : float 
-var screenHeight : float
-var buttonHeight : float
+var is_game_paused : bool
+var screen_width : float 
+var screen_height : float
+var button_height : float
 
 func _ready() -> void:
-	screenWidth = get_viewport().get_visible_rect().size.x
-	screenHeight = get_viewport().get_visible_rect().size.y
-	Global.printInfo([self, "screenWidth=", screenWidth, " screenHeight=", screenHeight])
+	screen_width = get_viewport().get_visible_rect().size.x
+	screen_height = get_viewport().get_visible_rect().size.y
+	Global.info([self, "screen_width=", screen_width, " screen_height=", screen_height])
 	
-	buttonHeight = screenHeight / 10
-	isGamePaused = false
+	button_height = screen_height / 10
+	is_game_paused = false
 
 # ---------- FUNTIONS ----------
 
-func findNodeByName(name, root : Node = get_tree().current_scene):
-	if(root.get_name() == name): return root
+func find_node_by_name(name, root : Node = get_tree().current_scene):
+	if root.get_name() == name: return root
 	for child in root.get_children():
-		if(child.get_name() == name):
+		if child.get_name() == name:
 			return child
-		var found = findNodeByName(name, child)
-		if(found): return found
-	printError([self, "Node ", name, " not found"])
+		var found = find_node_by_name(name, child)
+		if found: 
+			return found
+	error([self, "Node ", name, " not found"])
 	return null
 
 
-func printInfo(arr : Array): # FIRST ELEMENT IS ALWAYS "SELF"!!!
+func info(arr : Array): # FIRST ELEMENT IS ALWAYS "SELF"!!!
 	var file = (arr.front() as Node).get_path()
 	arr.pop_front()
-	var text = PoolStringArray(arr).join("")
+	var text := PoolStringArray(arr).join("")
 	var time := OS.get_time()
 	var hours = time.hour; var minutes = time.minute; var seconds = time.second
 	var millis = OS.get_ticks_msec() % 1000
-	if(hours < 10):
+	if hours < 10:
 		hours = "0" + String(hours)
-	if(minutes < 10):
+	if minutes < 10:
 		minutes = "0" + String(minutes)
-	if(seconds < 10):
+	if seconds < 10:
 		seconds = "0" + String(seconds)
-	if(millis < 10):
+	if millis < 10:
 		millis = "00" + String(millis)
-	elif(millis < 100):
+	elif millis < 100:
 		millis = "0" + String(millis)
 	print("INFO ", hours, "-", minutes, "-", seconds, "-", millis, " ", file, " >>>>> ", text)
 
 
-func printError(arr : Array): # FIRST ELEMENT IS ALWAYS "SELF"!!!
+func error(arr : Array): # FIRST ELEMENT IS ALWAYS "SELF"!!!
 	var file := (arr.front() as Node).get_path()
 	arr.pop_front()
-	var text = PoolStringArray(arr).join("")
+	var text := PoolStringArray(arr).join("")
 	var time := OS.get_time()
 	var hours = time.hour; var minutes = time.minute; var seconds = time.second
 	var millis = OS.get_ticks_msec() % 1000
-	if(hours < 10):
+	if hours < 10:
 		hours = "0" + String(hours)
-	if(minutes < 10):
+	if minutes < 10:
 		minutes = "0" + String(minutes)
-	if(seconds < 10):
+	if seconds < 10:
 		seconds = "0" + String(seconds)
+	if millis < 10:
+		millis = "00" + String(millis)
+	elif millis < 100:
+		millis = "0" + String(millis)
 	print("ERROR ", hours, "-", minutes, "-", seconds, "-", millis, " ", file, " >>>>> ", text)
 
 
-func getCurrentScene() -> Node:
-	return get_tree().current_scene
-
-
-func goToScene(scene : PackedScene):
+func go_to_scene(scene : PackedScene):
 	return get_tree().change_scene_to(scene)
 
 
-func resumeGame(pauseMenu : Control):
+func resume_game(pauseMenu : Control):
 	pauseMenu.hide()
 	get_tree().paused = false
-	isGamePaused = false
+	is_game_paused = false
 
 
-func pauseGame(pauseMenu : Control):
+func pause_game(pauseMenu : Control):
 	pauseMenu.show()
 	get_tree().paused = true
-	isGamePaused = true
+	is_game_paused = true
