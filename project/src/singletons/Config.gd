@@ -1,4 +1,5 @@
 extends Node
+# This is script which stores constant variables, player's settings and other constant stuff
 
 # ---------- CONSTANTS ----------
 
@@ -10,6 +11,11 @@ const BUTTONS := {
 	ENTER = "ui_accept",
 	ESCAPE = "ui_cancel",
 }
+
+var settings: Dictionary
+
+func _ready() -> void:
+	Global.info(self, String(settings))
 
 # ---------- CONSTANT OBJECTS ----------
 

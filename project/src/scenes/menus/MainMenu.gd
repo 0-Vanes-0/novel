@@ -15,10 +15,18 @@ func _ready() -> void:
 	loading_label.visible = true
 	v_box.visible = false
 	Preloader.call_deferred("load_everything")
-	Global.info([self, yield(Preloader, "loading_done")]) # yield паузит этот код, пока не получит loadingDone_ от Preloader
+	Global.info(self, yield(Preloader, "loading_done")) # yield паузит этот код, пока не получит loadingDone_ от Preloader
 	loading_label.visible = false
 	v_box.visible = true
 	$AudioStreamPlayer.play()
+	
+	#Global.get_player_variable
+	#Global.set_player_variable
+	Save.store_setting("Audio", "smth", true)
+	Save.store_variable("lol", 123)
+	yield(get_tree().create_timer(2.0), "timeout")
+	Global.info(self, String(Save.load_saved_variables()))
+	Global.info(self, String(Save.load_settings()))
 
 
 func _input(event: InputEvent) -> void:

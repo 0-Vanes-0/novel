@@ -32,7 +32,7 @@ func _ready() -> void:
 		
 		playTextScene(0) # ПОТОМ ТОЧНО НЕ 0
 	else:
-		Global.error([self, "loadNovelScripts() returned empty array"])
+		Global.error("loadNovelScripts() returned empty array")
 	changeCurrentScene(Preloader.text_scene) #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
@@ -64,7 +64,7 @@ func loadNovelScripts() -> Array:
 
 func changeCurrentScene(scene : PackedScene):
 	if scene == null:
-		Global.error([self, "Trying to change to null scene."])
+		Global.error("Trying to change to null scene.")
 	else:
 		for child in scene_player_node.get_children():
 			child.queue_free()
@@ -72,7 +72,7 @@ func changeCurrentScene(scene : PackedScene):
 		scene_player_node.add_child(node, true)
 		yield(node, "ready")
 		emit_signal("sceneLoaded_")
-		Global.info([self, "Changed scene successfully!"])
+		Global.info(self, "Changed scene successfully!")
 
 
 func _on_ScenePlayer_scene_finished() -> void:

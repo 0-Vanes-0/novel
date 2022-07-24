@@ -1,26 +1,28 @@
 extends Node
+# This script is responsible for loading some resources like scenes as PackedScene,
+# sprites, sounds and everything that can't be initialized through editor
 
 signal loading_done(text)
 
-var main_menu : PackedScene
-var scene_controller : PackedScene
-var text_scene : PackedScene
+var main_menu: PackedScene
+var scene_controller: PackedScene
+var text_scene: PackedScene
 
-var sound_player : PackedScene
-var test_music : AudioStreamMP3
-var test_sound1 : AudioStream
-var test_sound2 : AudioStream
-var test_sound3 : AudioStream
-var test_sound4 : AudioStream
+var sound_player: PackedScene
+var test_music: AudioStreamMP3
+var test_sound1: AudioStream
+var test_sound2: AudioStream
+var test_sound3: AudioStream
+var test_sound4: AudioStream
 
-var test_background : Texture
+var test_background: Texture
 
 
 
 func load_everything():
 	main_menu = _load_res("res://src/scenes/menus/MainMenu.tscn")
 	scene_controller = _load_res("res://src/scenes/SceneController.tscn")
-	text_scene = _load_res("res://src/scenes/MainScene.tscn")
+	text_scene = _load_res("res://src/scenes/ScenePlayer.tscn")
 	
 	sound_player = _load_res("res://src/objects/SoundPlayer.tscn")
 	test_music = _load_res("res://assets/audios/music/Revashol Central.mp3")
@@ -33,14 +35,15 @@ func load_everything():
 	
 	test_background = _load_res("res://assets/sprites/backgrounds/dani_bedroom.jpg")
 	
-	Config.fillConstants()
-	emit_signal("loadingDone", "Loading success!")
+	Config.settings = Save.load_settings()
+	Global.player_variables = Save.load_saved_variables()
+	emit_signal("loading_done", "Loading success!")
 
 
 func _load_res(path : String) -> Resource:
 	var res = load(path)
 	if res == null:
-		Global.error([self, "res with path ", path, " is null!"])
+		Global.error("res with path %s is null!" % path)
 	return res
 
 
@@ -50,7 +53,7 @@ func load_files(path : String, extension : String = "tscn") -> Array:
 	var dir := Directory.new()
 	dir.open(path)
 	if dir.list_dir_begin() != OK:
-		Global.error([self, "dir.list_dir_begin() returned error!"])
+		Global.error("dir.list_dir_begin() returned error!")
 	else:
 		while true:
 			var file_name := dir.get_next()
@@ -60,5 +63,5 @@ func load_files(path : String, extension : String = "tscn") -> Array:
 				scenes.append(load(path + file_name))
 		dir.list_dir_end()
 	if scenes.empty():
-		Global.error([self, "Preload scenes failed: no \"", extension, "\" found, path=", path])
+		Global.error("Preload scenes failed: no \"%s\" found, path=%s" % [extension, path])
 	return scenes
