@@ -1,6 +1,8 @@
 extends Node
 # This is script which manages save files (player.dat and settings.cfg)
 
+signal saving_done(err)
+
 const _PASSWORD := "sexisamyth"
 const _SAVE_FILES_PREFIX := "res://" #"user://"
 const _PLAYER_DATA_PATH := _SAVE_FILES_PREFIX + "saves/player.dat"
@@ -12,7 +14,7 @@ func store_variable(name: String, value):
 	var file: ConfigFile = ConfigFile.new()
 	var err = file.load_encrypted_pass(_PLAYER_DATA_PATH, _PASSWORD)
 	if err != OK:
-		Global.error("Error while opening file at %s, err = %s" % [_PLAYER_DATA_PATH, err])
+		Global.error("Error while opening file at %s, err = %s" % [_PLAYER_DATA_PATH, Global.parse_error(err)])
 		if err == ERR_FILE_NOT_FOUND:
 			_create_empty_file(_PLAYER_DATA_PATH)
 			store_variable(name, value)
@@ -20,14 +22,15 @@ func store_variable(name: String, value):
 	file.set_value("Variables", name, value)
 	err = file.save_encrypted_pass(_PLAYER_DATA_PATH, _PASSWORD)
 	if err != OK:
-		Global.error("Error while saving file at %s, err = %s" % [_PLAYER_DATA_PATH, err])
+		Global.error("Error while saving file at %s, err = %s" % [_PLAYER_DATA_PATH, Global.parse_error(err)])
+	emit_signal("saving_done", err)
 
 
 func load_saved_variables() -> Dictionary:
 	var file: ConfigFile = ConfigFile.new()
 	var err = file.load_encrypted_pass(_PLAYER_DATA_PATH, _PASSWORD)
 	if err != OK:
-		Global.error("Error while opening file at %s, err = %s" % [_PLAYER_DATA_PATH, err])
+		Global.error("Error while opening file at %s, err = %s" % [_PLAYER_DATA_PATH, Global.parse_error(err)])
 		if err == ERR_FILE_NOT_FOUND:
 			_create_empty_file(_PLAYER_DATA_PATH)
 		return {}
@@ -38,26 +41,29 @@ func load_saved_variables() -> Dictionary:
 	return variables
 
 
-func store_setting(section: String, name: String, value):
+func store_settings(settings: Dictionary):
 	var file: ConfigFile = ConfigFile.new()
 	var err = file.load(_SETTINGS_PATH)
 	if err != OK:
-		Global.error("Error while opening file at %s, err = %s" % [_SETTINGS_PATH, err])
+		Global.error("Error while opening file at %s, err = %s" % [_SETTINGS_PATH, Global.parse_error(err)])
 		if err == ERR_FILE_NOT_FOUND:
 			_create_empty_file(_SETTINGS_PATH)
-			store_setting(section, name, value)
+			store_settings(settings)
 	
-	file.set_value(section, name, value)
+	for section in settings.keys():
+		for setting in settings[section].keys():
+			file.set_value(section, setting, settings[section][setting])
 	err = file.save(_SETTINGS_PATH)
 	if err != OK:
-		Global.error("Error while saving file at %s, err = %s" % [_SETTINGS_PATH, err])
+		Global.error("Error while saving file at %s, err = %s" % [_SETTINGS_PATH, Global.parse_error(err)])
+	emit_signal("saving_done", err)
 
 
 func load_settings() -> Dictionary:
 	var file: ConfigFile = ConfigFile.new()
 	var err = file.load(_SETTINGS_PATH)
 	if err != OK:
-		Global.error("Error while opening file at %s, err = %s" % [_SETTINGS_PATH, err])
+		Global.error("Error while opening file at %s, err = %s" % [_SETTINGS_PATH, Global.parse_error(err)])
 		if err == ERR_FILE_NOT_FOUND:
 			_create_empty_file(_SETTINGS_PATH)
 		return {}

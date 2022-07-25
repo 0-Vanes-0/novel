@@ -35,8 +35,6 @@ func load_everything():
 	
 	test_background = _load_res("res://assets/sprites/backgrounds/dani_bedroom.jpg")
 	
-	Config.settings = Save.load_settings()
-	Global.player_variables = Save.load_saved_variables()
 	emit_signal("loading_done", "Loading success!")
 
 

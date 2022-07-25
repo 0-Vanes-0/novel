@@ -11,56 +11,36 @@ const BUTTONS := {
 	ENTER = "ui_accept",
 	ESCAPE = "ui_cancel",
 }
+const DEFAULT_SETTINGS := {
+	"Video" : {
+		"fullscreen" : false,
+	},
+	"Audio" : {
+		"music_on" : true,
+	},
+	"Interface" : {
+		"text_speed" : 1.0,
+	},
+}
 
 var settings: Dictionary
 
-func _ready() -> void:
-	Global.info(self, String(settings))
-
-# ---------- CONSTANT OBJECTS ----------
-
-#var projectileDictionary : Dictionary = { }
-#var buttonFont : DynamicFont
-#
-#func fillConstants():
-#	buttonFont = DynamicFont.new()
-#	buttonFont.font_data = Preloader.overwatchFontData
-#	buttonFont.size = 40
-#	buttonFont.extra_spacing_top = Global.buttonHeight / 10.0
-
 # ---------- FUNTIONS ----------
 
-#func fillDictionaries():
-#	projectileDictionary["knife"] = {
-#		"texture" : Preloader.knifeTexture,
-#		"spriteSettings" : {
-#			"scale" : 1.0,
-#			"isRotated" : true
-#		},
-#		"speed" : Global.screenWidth / 2,
-#		"damage" : 5
-#	}
-#	projectileDictionary["fire_orb"] = {
-#		"texture" : Preloader.fireOrbTexture,
-#		"spriteSettings" : {
-#			"scale" : 3.0,
-#			"isRotated" : false
-#		},
-#		"speed" : Global.screenWidth / 4,
-#		"damage" : 5
-#	}
-#
-#func createProjectile(nameOfProj : String) -> Projectile:
-#	if(projectileDictionary.has(nameOfProj)):
-#		var projType = projectileDictionary.get(nameOfProj)
-#		var proj : Projectile = Preloader.projectile.instance()
-#		proj.sprite.texture = projType.get("texture")
-#		var scale = projType.get("spriteSettings").get("scale")
-#		proj.scale = Vector2(scale, scale)
-#		proj.isProjRotated = projType.get("spriteSettings").get("isRotated")
-#		proj.speed = projType.get("speed")
-#		proj.damage = projType.get("damage")
-#		return proj
-#	else:
-#		Global.error([self, "projectileDictionary has not key=", nameOfProj])
-#		return null
+func _ready() -> void:
+	settings = Save.load_settings()
+	if settings.empty():
+		settings = DEFAULT_SETTINGS.duplicate(true)
+		Save.call_deferred("store_settings", settings)
+		Global.info(self, "Saving settings done! Retuned %s" % [yield(Save, "saving_done")])
+	Global.info(self, String(settings))
+
+
+func set_settings(settings: Dictionary):
+	Save.call_deferred("store_settings", settings)
+	Global.info(self, "Saving settings done! Retuned %s" % [yield(Save, "saving_done")])
+	settings = Save.load_settings()
+
+
+func get_setting(section: String, name: String): # -> Variant
+	return settings[section][name]

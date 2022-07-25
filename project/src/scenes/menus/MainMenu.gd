@@ -1,45 +1,54 @@
 extends Control
 
-onready var loading_label := $LoadingLabel as Label
-onready var v_box := $VBoxContainer as VBoxContainer
-onready var play_button := $VBoxContainer/PlayButton as Button
-onready var options_button := $VBoxContainer/OptionsButton as Button
-onready var quit_button := $VBoxContainer/QuitButton as Button
-onready var buttons := [play_button, options_button, quit_button]
-onready var has_focus_buttons := false
+onready var _loading_label := $LoadingLabel as Label
+onready var _main_buttons := $MainButtons as Control
+onready var _play_button := $MainButtons/VBoxContainer/PlayButton as Button
+onready var _options_button := $MainButtons/VBoxContainer/OptionsButton as Button
+onready var _quit_button := $MainButtons/VBoxContainer/QuitButton as Button
+onready var _buttons := [_play_button, _options_button, _quit_button]
+onready var _has_focus_buttons := false
+onready var _options_menu := $OptionsMenu as Control
+onready var _controls := $OptionsMenu/TabContainer/Controls as Tabs
+onready var _video := $OptionsMenu/TabContainer/Video as Tabs
+onready var _audio := $OptionsMenu/TabContainer/Audio as Tabs
+onready var _anim_player := $AnimationPlayer as AnimationPlayer
 
 
 
 func _ready() -> void:
-	get_viewport().connect("gui_focus_changed", self, "on_focus_changed")
-	loading_label.visible = true
-	v_box.visible = false
-	Preloader.call_deferred("load_everything")
-	Global.info(self, yield(Preloader, "loading_done")) # yield паузит этот код, пока не получит loadingDone_ от Preloader
-	loading_label.visible = false
-	v_box.visible = true
-	$AudioStreamPlayer.play()
+	get_viewport().connect("gui_focus_changed", self, "_on_focus_changed")
 	
-	#Global.get_player_variable
-	#Global.set_player_variable
-	Save.store_setting("Audio", "smth", true)
-	Save.store_variable("lol", 123)
-	yield(get_tree().create_timer(2.0), "timeout")
-	Global.info(self, String(Save.load_saved_variables()))
-	Global.info(self, String(Save.load_settings()))
+	_loading_label.visible = true
+	_main_buttons.visible = false
+	Preloader.call_deferred("load_everything")
+	Global.info(self, yield(Preloader, "loading_done")) # yield pauses this code until it gets signal "loading_done" from Preloader
+	_loading_label.visible = false
+	_main_buttons.visible = true
+	
+	$AudioStreamPlayer.play()
 
 
 func _input(event: InputEvent) -> void:
-	if(event.is_action_pressed(Config.BUTTONS.ESCAPE)):
-		get_tree().quit(0)
-	if not has_focus_buttons and event.is_action_pressed(Config.BUTTONS.DOWN):
-		quit_button.grab_focus() # На самом деле будет выбрана play_button
-	if not has_focus_buttons and event.is_action_pressed(Config.BUTTONS.UP):
-		play_button.grab_focus() # На самом деле будет выбрана quit_button
+	if not _has_focus_buttons and event.is_action_pressed(Config.BUTTONS.DOWN):
+		_quit_button.grab_focus() # На самом деле будет выбрана _play_button
+	if not _has_focus_buttons and event.is_action_pressed(Config.BUTTONS.UP):
+		_play_button.grab_focus() # На самом деле будет выбрана _quit_button
 
 
-func on_focus_changed(control : Control) -> void:
-	has_focus_buttons = true
+func _switch_to_Options():
+	_anim_player.play("show_options")
+	yield(_anim_player, "animation_finished")
+	$OptionsMenu/BackButton.grab_focus()
+
+
+func _switch_to_MainMenu():
+	_anim_player.play_backwards("show_options")
+	yield(_anim_player, "animation_finished")
+	_options_button.grab_focus()
+
+
+func _on_focus_changed(control : Control) -> void:
+	_has_focus_buttons = true
 
 
 func _on_PlayButton_pressed() -> void:
@@ -47,7 +56,7 @@ func _on_PlayButton_pressed() -> void:
 
 
 func _on_OptionsButton_pressed() -> void:
-	pass # Replace with function body.
+	_switch_to_Options()
 
 
 func _on_QuitButton_pressed() -> void:
@@ -55,30 +64,16 @@ func _on_QuitButton_pressed() -> void:
 
 
 func _on_PlayButton_mouse_entered() -> void:
-	play_button.grab_focus()
+	_play_button.grab_focus()
 
 
 func _on_OptionsButton_mouse_entered() -> void:
-	options_button.grab_focus()
+	_options_button.grab_focus()
 
 
 func _on_QuitButton_mouse_entered() -> void:
-	quit_button.grab_focus()
+	_quit_button.grab_focus()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+func _on_BackButton_pressed() -> void:
+	_switch_to_MainMenu()

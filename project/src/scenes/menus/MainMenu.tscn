@@ -1,9 +1,51 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://src/scenes/menus/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/themes/menu_theme.tres" type="Theme" id=2]
 [ext_resource path="res://assets/sprites/backgrounds/titleBackground.jpg" type="Texture" id=3]
 [ext_resource path="res://assets/audios/music/Undertale - sans..mp3" type="AudioStream" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "show_options"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainButtons:rect_position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -1920, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("OptionsMenu:rect_position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1920, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Background:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.686275 ), Color( 1, 1, 1, 0.392157 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "show_title"
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -12,7 +54,7 @@ theme = ExtResource( 2 )
 script = ExtResource( 1 )
 
 [node name="Background" type="TextureRect" parent="."]
-modulate = Color( 1, 1, 1, 0.392157 )
+self_modulate = Color( 1, 1, 1, 0.686275 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -30,7 +72,14 @@ margin_bottom = 256.0
 text = "Загрузка..."
 valign = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MainButtons" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainButtons"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 64.0
@@ -43,7 +92,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="PlayButton" type="Button" parent="VBoxContainer"]
+[node name="PlayButton" type="Button" parent="MainButtons/VBoxContainer"]
 margin_top = 24.0
 margin_right = 320.0
 margin_bottom = 152.0
@@ -53,7 +102,7 @@ keep_pressed_outside = true
 text = "Играть"
 align = 0
 
-[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="MainButtons/VBoxContainer"]
 margin_top = 156.0
 margin_right = 320.0
 margin_bottom = 284.0
@@ -62,7 +111,7 @@ keep_pressed_outside = true
 text = "Настройки"
 align = 0
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
+[node name="QuitButton" type="Button" parent="MainButtons/VBoxContainer"]
 margin_top = 288.0
 margin_right = 320.0
 margin_bottom = 416.0
@@ -72,13 +121,78 @@ keep_pressed_outside = true
 text = "Выйти"
 align = 0
 
+[node name="OptionsMenu" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 1920.0
+margin_right = 1919.99
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="TabContainer" type="TabContainer" parent="OptionsMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -448.0
+margin_top = -256.0
+margin_right = 448.0
+margin_bottom = 256.0
+
+[node name="Controls" type="Tabs" parent="OptionsMenu/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 43.0
+focus_neighbour_left = NodePath("../../BackButton")
+focus_neighbour_right = NodePath("../Video")
+focus_mode = 2
+
+[node name="Video" type="Tabs" parent="OptionsMenu/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 48.0
+margin_right = -4.0
+margin_bottom = -4.0
+focus_neighbour_left = NodePath("../Controls")
+focus_neighbour_right = NodePath("../Audio")
+focus_mode = 2
+
+[node name="Audio" type="Tabs" parent="OptionsMenu/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 48.0
+margin_right = -4.0
+margin_bottom = -4.0
+focus_neighbour_left = NodePath("../Video")
+focus_neighbour_right = NodePath("../../BackButton")
+focus_mode = 2
+
+[node name="BackButton" type="Button" parent="OptionsMenu"]
+margin_left = 512.0
+margin_top = 284.0
+margin_right = 552.0
+margin_bottom = 339.0
+focus_neighbour_left = NodePath("../TabContainer/Audio")
+focus_neighbour_right = NodePath("../TabContainer/Controls")
+text = "<--"
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 volume_db = -30.0
 
-[connection signal="mouse_entered" from="VBoxContainer/PlayButton" to="." method="_on_PlayButton_mouse_entered"]
-[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
-[connection signal="mouse_entered" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_mouse_entered"]
-[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
-[connection signal="mouse_entered" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_mouse_entered"]
-[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/show_options = SubResource( 1 )
+anims/show_title = SubResource( 2 )
+
+[connection signal="mouse_entered" from="MainButtons/VBoxContainer/PlayButton" to="." method="_on_PlayButton_mouse_entered"]
+[connection signal="pressed" from="MainButtons/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="mouse_entered" from="MainButtons/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_mouse_entered"]
+[connection signal="pressed" from="MainButtons/VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="mouse_entered" from="MainButtons/VBoxContainer/QuitButton" to="." method="_on_QuitButton_mouse_entered"]
+[connection signal="pressed" from="MainButtons/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="OptionsMenu/BackButton" to="." method="_on_BackButton_pressed"]
