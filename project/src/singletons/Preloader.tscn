@@ -1,0 +1,24 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/singletons/Preloader.gd" type="Script" id=1]
+[ext_resource path="res://src/scenes/menus/MainMenu.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/scenes/SceneController.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/objects/SoundPlayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/scenes/ScenePlayer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/sprites/backgrounds/bedroom.png" type="Texture" id=6]
+[ext_resource path="res://assets/sprites/backgrounds/kitchen.jpg" type="Texture" id=7]
+[ext_resource path="res://assets/sprites/backgrounds/no_background.png" type="Texture" id=8]
+
+[node name="Preloader" type="Node"]
+script = ExtResource( 1 )
+main_menu = ExtResource( 2 )
+scene_controller = ExtResource( 3 )
+scene_player = ExtResource( 5 )
+sound_player = ExtResource( 4 )
+character_directory = "res://assets/character_resources"
+novel_texts_directory = "res://assets/novel texts"
+backgrounds = {
+"bedroom": ExtResource( 6 ),
+"kitchen": ExtResource( 7 ),
+"no_background": ExtResource( 8 )
+}

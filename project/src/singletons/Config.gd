@@ -9,7 +9,9 @@ const BUTTONS := {
 	LEFT = "ui_left",
 	RIGHT = "ui_right",
 	ENTER = "ui_accept",
+	LMB = "ui_select",
 	ESCAPE = "ui_cancel",
+	RESTART = "ui_home",
 }
 const DEFAULT_SETTINGS := {
 	"Video" : {
@@ -33,7 +35,7 @@ func _ready() -> void:
 		settings = DEFAULT_SETTINGS.duplicate(true)
 		Save.call_deferred("store_settings", settings)
 		Global.info(self, "Saving settings done! Retuned %s" % [yield(Save, "saving_done")])
-	Global.info(self, String(settings))
+	Global.info(self, "Current settings " + String(settings))
 
 
 func set_settings(settings: Dictionary):
@@ -43,4 +45,7 @@ func set_settings(settings: Dictionary):
 
 
 func get_setting(section: String, name: String): # -> Variant
-	return settings[section][name]
+	if settings.has(section):
+		if settings[section].has(name):
+			return settings[section][name]
+	return null

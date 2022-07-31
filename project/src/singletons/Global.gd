@@ -14,23 +14,26 @@ func _ready() -> void:
 	
 	screen_width = get_viewport().get_visible_rect().size.x
 	screen_height = get_viewport().get_visible_rect().size.y
-	Global.info(self, "screen_width=%s, screen_height=%s" % [screen_width, screen_height])
+#	Global.info(self, "screen_width=%s, screen_height=%s" % [screen_width, screen_height])
 	VisualServer.set_default_clear_color(Color(0, 0, 0, 0))
 	is_game_paused = false
 
 
 func set_player_variable(name: String, value):
 	Save.call_deferred("store_variable", name, value)
-	Global.info(self, "Saving %s done! Returned %s" % [name, Global.parse_error(yield(Save, "saving_done"))])
+	Global.info(self, "Saving %s to %s done! Returned %s" % [name, value, Global.parse_error(yield(Save, "saving_done"))])
 	player_variables = Save.load_saved_variables()
 
-func get_player_variable(name: String): # -> Variant
-	return player_variables["Variables"][name]
+func get_player_variable(name: String, default = false): # -> Variant
+	if not player_variables.has(name):
+		set_player_variable(name, default)
+	return player_variables[name]
 
 # ---------- FUNTIONS ----------
 
 func find_node_by_name(name, root : Node = get_tree().current_scene):
-	if root.get_name() == name: return root
+	if root.get_name() == name: 
+		return root
 	for child in root.get_children():
 		if child.get_name() == name:
 			return child
@@ -39,16 +42,6 @@ func find_node_by_name(name, root : Node = get_tree().current_scene):
 			return found
 	error("Node %s not found" % name)
 	return null
-
-
-func info(source: Node, message: String):
-	var node_path = source.get_path()
-	print("    INFO %s >>>>> %s" % [node_path, message])
-
-
-func error(message: String):
-	print("%s at:" % message)
-	print_stack()
 
 
 func go_to_scene(scene : PackedScene):
@@ -65,6 +58,24 @@ func pause_game(pauseMenu : Control):
 	pauseMenu.show()
 	get_tree().paused = true
 	is_game_paused = true
+
+
+func close_game():
+	pass
+
+
+func info(source: Node = null, message = null):
+	var node_path = source.get_path() if source != null else "Unknown node"
+	var string := String(message)
+	var limit := 834
+	if string.length() > limit:
+		string = string.substr(0, limit) + "..."
+	print("    INFO %s >>>>> %s" % [node_path, string])
+
+
+func error(message: String):
+	print("%s at:" % message)
+	print_stack()
 
 
 func parse_error(err) -> String:

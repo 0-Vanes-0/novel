@@ -22,6 +22,7 @@ var _unresolved_jump_nodes := []
 ## A tree of nodes representing a scene. It stores nodes in its `nodes` dictionary.
 ## See the node types below.
 class DialogueTree:
+	var name: String
 	var nodes := {}
 	var index := 0
 
@@ -163,10 +164,11 @@ class PassCommandNode:
 
 ## Takes in a syntax tree from the SceneParser and turns it into a
 ## `DialogueTree` for the `ScenePlayer` to play.
-func transpile(syntax_tree: SceneParser.SyntaxTree, start_index: int) -> DialogueTree:
+func transpile(tree_name: String, syntax_tree: SceneParser.SyntaxTree, start_index: int) -> DialogueTree:
 	var dialogue_tree := DialogueTree.new()
 	dialogue_tree.index = start_index
-
+	dialogue_tree.name = tree_name
+	
 	while not syntax_tree.is_at_end():
 		var expression: SceneParser.BaseExpression = syntax_tree.move_to_next_expression()
 
@@ -202,7 +204,7 @@ func transpile(syntax_tree: SceneParser.SyntaxTree, start_index: int) -> Dialogu
 				# DialogueTree instances
 				# We pass in the current index tree's index here so the subtree can transpile
 				# properly
-				var block_dialogue_tree: DialogueTree = transpile(subtree, dialogue_tree.index)
+				var block_dialogue_tree: DialogueTree = transpile(tree_name, subtree, dialogue_tree.index)
 
 				# Add the pointer to this code block in the choice tree
 				choices.append({label = block.label, target = dialogue_tree.index})
@@ -246,7 +248,7 @@ func transpile(syntax_tree: SceneParser.SyntaxTree, start_index: int) -> Dialogu
 			# Transpile the if block
 			var if_subtree := SceneParser.SyntaxTree.new()
 			if_subtree.values = expression.if_block.block
-			var if_block_dialogue_tree: DialogueTree = transpile(if_subtree, dialogue_tree.index)
+			var if_block_dialogue_tree: DialogueTree = transpile(tree_name, if_subtree, dialogue_tree.index)
 
 			# Add the if block's tree's nodes to the main dialogue tree
 			_copy_nodes(original_value, if_block_dialogue_tree.nodes.keys(), dialogue_tree, if_block_dialogue_tree)
@@ -259,7 +261,7 @@ func transpile(syntax_tree: SceneParser.SyntaxTree, start_index: int) -> Dialogu
 					var elif_subtree := SceneParser.SyntaxTree.new()
 					elif_subtree.values = elif_block.block
 					var elif_block_dialogue_tree: DialogueTree = transpile(
-						elif_subtree, dialogue_tree.index
+						tree_name, elif_subtree, dialogue_tree.index
 					)
 
 					# Store pointer to the elif block in the choice tree node
@@ -274,7 +276,7 @@ func transpile(syntax_tree: SceneParser.SyntaxTree, start_index: int) -> Dialogu
 				else_subtree.values = expression.else_block.block
 
 				var else_block_dialogue_tree: DialogueTree = transpile(
-					else_subtree, dialogue_tree.index
+					tree_name, else_subtree, dialogue_tree.index
 				)
 				# Store pointer to the else block in the choice tree node
 				tree_node.else_block = ConditionalBlockNode.new(dialogue_tree.index, null)
@@ -350,6 +352,7 @@ func _transpile_command(dialogue_tree: DialogueTree, expression: SceneParser.Bas
 				temp.erase(jump_node)
 
 		_unresolved_jump_nodes = temp
+	
 	else:
 		push_error("Unrecognized command type `%s`" % expression.value)
 

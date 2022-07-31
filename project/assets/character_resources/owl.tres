@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://assets/character_resources/Character.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/characters/outerwilds_prisoner.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/characters/owl_full_head.png" type="Texture" id=3]
+
+[resource]
+script = ExtResource( 1 )
+id = "owl"
+display_name = "Owl"
+bio = "Hoo-hoo!"
+age = 1000
+default_image = "neutral"
+images = {
+"broken": ExtResource( 2 ),
+"neutral": ExtResource( 3 )
+}

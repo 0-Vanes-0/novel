@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/objects/textbox/ChoiceSelector.gd" type="Script" id=1]
+
+[node name="ChoiceSelector" type="VBoxContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+alignment = 1
+script = ExtResource( 1 )

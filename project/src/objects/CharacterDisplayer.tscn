@@ -1,3 +1,27 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/objects/CharacterDisplayer.gd" type="Script" id=1]
 
 [node name="CharacterDisplayer" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 1088.0 ],
+"_edit_vertical_guides_": [ 1920.0 ]
+}
+
+[node name="Left" type="Position2D" parent="."]
+position = Vector2( 320, 1088 )
+
+[node name="MiddleLeft" type="Position2D" parent="."]
+position = Vector2( 640, 1088 )
+
+[node name="Middle" type="Position2D" parent="."]
+position = Vector2( 960, 1088 )
+
+[node name="MiddleRight" type="Position2D" parent="."]
+position = Vector2( 1280, 1088 )
+
+[node name="Right" type="Position2D" parent="."]
+position = Vector2( 1600, 1088 )
+
+[node name="Tween" type="Tween" parent="."]

@@ -151,7 +151,6 @@ class Parser:
 
 		while not self.is_at_end_of_list() and self.peek().type != stop_at_type:
 			var expression := self.parse_next_token()
-
 			if expression:
 				arguments.append(expression)
 
@@ -193,7 +192,6 @@ class Parser:
 	## Parse to next token and returns an approriate expression for the syntax tree
 	func parse_next_token() -> BaseExpression:
 		var current_token := self.move_to_next_token()
-
 		if (
 			self.get_previous_token()
 			and (
@@ -208,7 +206,6 @@ class Parser:
 			# Dialogue line with some options (character, expression, etc. )
 			if current_token.type == SceneLexer.TOKEN_TYPES.SYMBOL:
 				var arguments: Array = find_expressions(SceneLexer.TOKEN_TYPES.STRING_LITERAL)
-
 				# Push the character name to the front
 				arguments.push_front(current_token)
 
@@ -302,13 +299,12 @@ class Parser:
 ## Takes in a token list from the lexer and returns a syntax tree
 func parse(tokens: Array) -> SyntaxTree:
 	var parser = Parser.new(tokens)
-
+	
 	var tree := SyntaxTree.new()
-
+	
 	while not parser.is_at_end_of_list():
 		var expression: BaseExpression = parser.parse_next_token()
-
 		if expression:
 			tree.append_expression(expression)
-
+	
 	return tree

@@ -8,16 +8,17 @@ var transpiler := SceneTranspiler.new()
 
 func _ready() -> void:
 	push_error("ssssssssssssssssssss")
-	var text := lexer.read_file_content("res://src/parser/test-scene2.txt")
+	var text := lexer.read_file_content("res://assets/novel texts/test_chapter.txt")
 	# The token list
 	var tokens: Array = lexer.tokenize(text)
 
-#	print(tokens)
+	Global.info(self, "%s" % [tokens])
+	Global.info(self, "tokens size = %s" % [tokens.size()])
 
 	# The syntax tree
 	var tree: SceneParser.SyntaxTree = parser.parse(tokens)
 
-	print(tree.values)
+	Global.info(self, tree.values)
 
 	# The finished .scene script
-	var script: SceneTranspiler.DialogueTree = transpiler.transpile(tree, 0)
+	var script: SceneTranspiler.DialogueTree = transpiler.transpile("test_chapter", tree, 0)

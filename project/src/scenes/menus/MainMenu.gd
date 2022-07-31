@@ -20,8 +20,7 @@ func _ready() -> void:
 	
 	_loading_label.visible = true
 	_main_buttons.visible = false
-	Preloader.call_deferred("load_everything")
-	Global.info(self, yield(Preloader, "loading_done")) # yield pauses this code until it gets signal "loading_done" from Preloader
+	Preloader.load_everything()
 	_loading_label.visible = false
 	_main_buttons.visible = true
 	
@@ -52,6 +51,11 @@ func _on_focus_changed(control : Control) -> void:
 
 
 func _on_PlayButton_pressed() -> void:
+	Config.settings["Audio"]["music_on"] = false
+	Save.store_settings(Config.settings)
+	Global.set_player_variable("saved_scene", "test_chapter")
+#	if not Global.get_player_variable("saved_scene"):
+#		Global.set_player_variable("saved_scene", "empty_scene") #"empty_scene"
 	get_tree().change_scene_to(Preloader.scene_controller)
 
 
