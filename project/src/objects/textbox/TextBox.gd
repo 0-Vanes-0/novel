@@ -13,12 +13,12 @@ export var display_speed := 20.0
 export var bbcode_text := "" setget set_bbcode_text
 
 #onready var _skip_button: Button = $SkipButton
-onready var _name_label := $NameBox/Label as Label
 onready var _name_background := $NameBox as TextureRect
+onready var _name_label := $NameBox/Label as Label
 onready var _rich_text_label := $RichTextLabel as RichTextLabel
+onready var _blinking_arrow := $RichTextLabel/Arrow as Control
 onready var _choice_selector := $ChoiceSelector as ChoiceSelector
 onready var _tween := $Tween as Tween
-onready var _blinking_arrow := $RichTextLabel/Arrow as Control
 onready var _anim_player := $AnimationPlayer as AnimationPlayer
 
 
@@ -27,12 +27,13 @@ func _ready() -> void:
 	hide()
 	_blinking_arrow.hide()
 	
+	_name_background.hide()
 	_name_label.text = ""
 	_rich_text_label.bbcode_text = ""
 	_rich_text_label.visible_characters = 0
 	
 	_tween.connect("tween_all_completed", self, "_on_Tween_tween_all_completed")
-	_choice_selector.connect("choice_made", self, "_on_ChoiceSelector_choice_made")
+	_choice_selector.connect("choice_selected", self, "_on_ChoiceSelector_choice_selected")
 	
 #	_skip_button.connect("timer_ticked", self, "_on_SkipButton_timer_ticked")
 
@@ -51,23 +52,26 @@ func _advance_dialogue() -> void:
 
 
 func display(text: String, character_name := "", speed := display_speed) -> void:
+	if character_name == Preloader.get_narrator().display_name:
+		if _name_background.visible:
+			_anim_player.play("name_box_fade_out")
+			yield(_anim_player, "animation_finished")
+	elif character_name != "":
+		_name_label.text = character_name
+		if not _name_background.visible:
+			set_bbcode_text("")
+			_anim_player.play("name_box_fade_in")
+			yield(_anim_player, "animation_finished")
+	
 	set_bbcode_text(text)
 	if speed != display_speed:
 		display_speed = speed
-	
-	if character_name == Preloader.get_narrator().display_name:
-		_name_background.hide()
-	elif character_name != "":
-		_name_background.show()
-		if _name_label.text == "":
-			_name_label.show() # Позже добавить анимацию
-		
-		_name_label.text = character_name
 
 
 func display_choice(choices: Array) -> void:
 #	_skip_button.hide()
-	_name_background.disappear()
+	if _name_background.visible:
+		_anim_player.play("name_box_fade_out")
 	_rich_text_label.hide()
 	_blinking_arrow.hide()
 	_choice_selector.display(choices)
@@ -108,10 +112,10 @@ func _on_Tween_tween_all_completed() -> void:
 	_blinking_arrow.show()
 
 
-func _on_ChoiceSelector_choice_made(target_id: int) -> void:
+func _on_ChoiceSelector_choice_selected(target_id: int) -> void:
 	emit_signal("choice_made", target_id)
 #	_skip_button.show()
-	_name_background.appear()
+#	_name_background.appear()
 	_rich_text_label.show()
 
 

@@ -1,6 +1,0 @@
-background no_background fade_in
-transition fade_in
-"Нет фона? У-у-у..."
-"Хотя бы текст тут есть............................................................................................."
-transition fade_out
-background no_background fade_out

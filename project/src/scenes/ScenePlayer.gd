@@ -73,7 +73,7 @@ func run_scene():
 			var bg_tx: Texture = (
 					Preloader.backgrounds[node.background]
 					if Preloader.backgrounds.has(node.background)
-					else Preloader.backgrounds.no_background
+					else Preloader.backgrounds["no_background"]
 			)
 			_background.texture = bg_tx
 			if node.transition != "":
@@ -83,7 +83,14 @@ func run_scene():
 		
 		# Manage variables.
 		elif node is SceneTranspiler.SetCommandNode:
-			Global.set_player_variable(node.symbol, node.value)
+			match node.value:
+				"true":
+					Global.set_player_variable(node.symbol, true)
+				"false":
+					Global.set_player_variable(node.symbol, false)
+				var exception:
+					Global.info(self, "Got command 'set %s %s'" %[node.symbol, exception])
+					Global.set_player_variable(node.symbol, exception)
 			key = node.next
 		
 		# Change to another scene.
@@ -95,6 +102,7 @@ func run_scene():
 		
 		# Choices.
 		elif node is SceneTranspiler.ChoiceTreeNode:
+			Global.info(self, "Entered choice of %s" %[node.choices])
 			_text_box.display_choice(node.choices)
 			key = yield(_text_box, "choice_made")
 			if key == KEY_RESTART_SCENE:
@@ -103,13 +111,13 @@ func run_scene():
 		
 		# Recognizing conditions.
 		elif node is SceneTranspiler.ConditionalTreeNode:
-			var variables_list: Dictionary = Global.player_variables
+			var variable: bool = Global.get_player_variable(node.if_block.condition.value)
+			Global.info(self, "Entered condition %s, equals to %s" 
+					%[node.if_block.condition.value, variable])
 			
 			# Evaluate the if's condition
-			if (
-				variables_list.has(node.if_block.condition.value)
-				and variables_list[node.if_block.condition.value]
-			):
+			if variable == true:
+				Global.info(self, "Went to if!!!!!!!!!!!!!!!")
 				key = node.if_block.next
 			else:
 				# Have to use this flag because we can't `continue` out of the elif loop
@@ -117,10 +125,8 @@ func run_scene():
 				
 				# Evaluate the elif's conditions
 				for block in node.elif_blocks:
-					if (
-						variables_list.has(block.condition.value)
-						and variables_list[block.condition.value]
-					):
+					variable = Global.get_player_variable(block.condition.value)
+					if variable == true:
 						key = block.next
 						elif_condition_fulfilled = true
 						break
@@ -129,6 +135,7 @@ func run_scene():
 					if node.else_block:
 						# Go to else
 						key = node.else_block.next
+						Global.info(self, "Went to else!!!!!!!!!!!!!!! key = %s" %key)
 					else:
 						# Move on
 						key = node.next

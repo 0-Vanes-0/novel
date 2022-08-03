@@ -63,6 +63,11 @@ _global_script_classes=[ {
 "class": "TextBox",
 "language": "GDScript",
 "path": "res://src/objects/textbox/TextBox.gd"
+}, {
+"base": "Resource",
+"class": "TextResource",
+"language": "GDScript",
+"path": "res://assets/novel_texts/TextResource.gd"
 } ]
 _global_script_class_icons={
 "CSVEditor": "",
@@ -75,7 +80,8 @@ _global_script_class_icons={
 "SceneParser": "",
 "ScenePlayer": "",
 "SceneTranspiler": "",
-"TextBox": ""
+"TextBox": "",
+"TextResource": ""
 }
 
 [application]

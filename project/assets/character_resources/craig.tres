@@ -8,10 +8,11 @@
 script = ExtResource( 1 )
 id = "craig"
 display_name = "Креиг"
-bio = "Здесь нужно описание?"
+bio = "Здесь нужно описание?
+В несколько строк?"
 age = 10
-default_image = "neutral"
+default_image = "_"
 images = {
-"neutral": ExtResource( 3 ),
+"_": ExtResource( 3 ),
 "pog": ExtResource( 2 )
 }

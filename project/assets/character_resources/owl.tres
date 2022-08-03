@@ -7,11 +7,11 @@
 [resource]
 script = ExtResource( 1 )
 id = "owl"
-display_name = "Owl"
+display_name = "Соволень"
 bio = "Hoo-hoo!"
 age = 1000
-default_image = "neutral"
+default_image = "_"
 images = {
-"broken": ExtResource( 2 ),
-"neutral": ExtResource( 3 )
+"_": ExtResource( 3 ),
+"broken": ExtResource( 2 )
 }

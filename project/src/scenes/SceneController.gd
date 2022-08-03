@@ -30,7 +30,7 @@ func _input(event: InputEvent) -> void:
 
 func _load_scripts():
 	NOVEL_SCENES.clear()
-	var _scripts: Dictionary = Preloader.load_files_as_text(Preloader.novel_texts_directory)
+	var _scripts: Dictionary = Preloader.novel_texts
 	if not _scripts.empty():
 		var lexer := SceneLexer.new()
 		var parser := SceneParser.new()

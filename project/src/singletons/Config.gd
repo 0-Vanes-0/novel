@@ -33,14 +33,14 @@ func _ready() -> void:
 	settings = Save.load_settings()
 	if settings.empty():
 		settings = DEFAULT_SETTINGS.duplicate(true)
-		Save.call_deferred("store_settings", settings)
-		Global.info(self, "Saving settings done! Retuned %s" % [yield(Save, "saving_done")])
+		Global.info(self, "Saving settings done! Retuned %s" 
+				%[Global.parse_error(Save.store_settings(settings))])
 	Global.info(self, "Current settings " + String(settings))
 
 
 func set_settings(settings: Dictionary):
-	Save.call_deferred("store_settings", settings)
-	Global.info(self, "Saving settings done! Retuned %s" % [yield(Save, "saving_done")])
+	Global.info(self, "Saving settings done! Retuned %s" 
+			%[Global.parse_error(Save.store_settings(settings))])
 	settings = Save.load_settings()
 
 

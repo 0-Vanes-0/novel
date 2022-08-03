@@ -8,10 +8,10 @@ export (String, MULTILINE) var bio := "Fill this with the character's complete b
 export var age := 0
 
 ## Default key to use if the user doesn't specify the image to display
-export var default_image := "neutral"
+export var default_image := "_"
 ## Holds the character's portraits, mapping expressions (keys) to an image texture.
 export var images := {
-	neutral = null,
+	_ = null,
 }
 
 

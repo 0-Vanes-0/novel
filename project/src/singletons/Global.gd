@@ -20,8 +20,8 @@ func _ready() -> void:
 
 
 func set_player_variable(name: String, value):
-	Save.call_deferred("store_variable", name, value)
-	Global.info(self, "Saving %s to %s done! Returned %s" % [name, value, Global.parse_error(yield(Save, "saving_done"))])
+	Global.info(self, "Saving %s to %s done! Returned %s" 
+			%[name, value, Global.parse_error(Save.store_variable(name, value))])
 	player_variables = Save.load_saved_variables()
 
 func get_player_variable(name: String, default = false): # -> Variant
@@ -76,6 +76,19 @@ func info(source: Node = null, message = null):
 func error(message: String):
 	print("%s at:" % message)
 	print_stack()
+
+
+func print_arr(array: Array):
+	print("    INFO_ARRAY vvvvv")
+	for i in range(array.size()):
+		if i < 10:
+			print("000", i, " - ", array[i])
+		elif i < 100:
+			print("00", i, " - ", array[i])
+		elif i < 1000:
+			print("0", i, " - ", array[i])
+		elif i < 10000:
+			print(i, " - ", array[i])
 
 
 func parse_error(err) -> String:
