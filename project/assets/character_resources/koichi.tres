@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://assets/character_resources/Character.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/characters/71-710090_jojo-koichi-t-pose-hd-png-download.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/characters/koichi_up.png" type="Texture" id=3]
+
+[resource]
+script = ExtResource( 1 )
+id = "koichi"
+display_name = "Вадим"
+bio = "Он не Вадим, он Коич."
+age = 14
+default_image = "_"
+images = {
+"_": ExtResource( 2 ),
+"legs": ExtResource( 3 )
+}

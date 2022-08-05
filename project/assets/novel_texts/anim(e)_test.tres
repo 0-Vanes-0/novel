@@ -1,0 +1,40 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://assets/novel_texts/TextResource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+_text = "#
+background bedroom fade_in
+koichi _ enter middle \"\"
+transition fade_in
+\"Одним утром в Морио...\"
+
+koichi \"Пойду на кухню.\"
+transition fade_out
+background bedroom fade_out
+
+background kitchen fade_in
+transition fade_in
+jotaro l enter left \"\"
+koichi \"Джо... Джотаро-сан?\"
+jotaro r \"Можешь называть меня ''Джотаро Токийский''.\"
+koichi \"Нет.\"
+jotaro l \"Ладно.\"
+
+choice:
+	\"Джотаро-сан, что вы делаете в моей кухне?\":
+		koichi \"Вы хотите кушац?\"
+		jotaro r \"Знаешь, чего я хочу?\"
+		jotaro \"ШИПОВНИК ЕБУЧИЙ! Как ты это сделаешь?\"
+		
+	\"Джотаро-сан, хотите... покажу трюк?\":
+		jotaro r \"У тебя есть стэнд?\"
+		koichi \"Лучше! У меня акробатика!\"
+		koichi legs \"Хоба!\"
+
+jotaro \"...\"
+jotaro \"Ну я и этому деду и говорю:\"
+\" \"
+background kitchen fade_out
+#"

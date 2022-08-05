@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=4 format=2]
+
+[ext_resource path="res://assets/character_resources/Character.gd" type="Script" id=1]
+[ext_resource path="res://assets/sprites/characters/Jotaro_JoJo_4.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/characters/Jotaro_JoJo_5.png" type="Texture" id=3]
+
+[resource]
+script = ExtResource( 1 )
+id = "jotaro"
+display_name = "Джотаро-сан"
+bio = "Hoo-hoo!"
+age = 19
+default_image = "r"
+images = {
+"l": ExtResource( 3 ),
+"r": ExtResource( 2 )
+}

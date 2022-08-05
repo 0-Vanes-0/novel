@@ -11,6 +11,7 @@ func display(choices: Array) -> void:
 		button.text = choice.label
 		button.rect_min_size.y = 80
 		button.connect("pressed", self, "_on_Button_pressed", [choice.target])
+		button.connect("mouse_entered", self, "_on_Button_mouse_entered", [button])
 		add_child(button)
 	# Temporary fix for the buttons not showing when there are consecutive choice nodes
 	yield(get_tree(), "idle_frame")
@@ -25,3 +26,7 @@ func _on_Button_pressed(target_id: int) -> void:
 func _clear() -> void:
 	for child in get_children():
 		child.queue_free()
+
+
+func _on_Button_mouse_entered(button: Button):
+	button.grab_focus()

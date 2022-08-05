@@ -51,9 +51,9 @@ func _on_focus_changed(control : Control) -> void:
 
 
 func _on_PlayButton_pressed() -> void:
-	Config.settings["Audio"]["music_on"] = false
+	Config.settings["Audio"]["music_on"] = true
 	Save.store_settings(Config.settings)
-	Global.set_player_variable("saved_scene", "test_chapter")
+	Global.set_player_variable("saved_scene", "anim(e)_test")
 	Global.set_player_variable("seeing_craig_first_time", true)
 #	if not Global.get_player_variable("saved_scene"):
 #		Global.set_player_variable("saved_scene", "empty_scene") #"empty_scene"

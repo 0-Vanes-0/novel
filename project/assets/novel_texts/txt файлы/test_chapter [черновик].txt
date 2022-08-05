@@ -1,0 +1,69 @@
+#
+background bedroom fade_in
+
+owl _ enter middle ""
+transition fade_in
+
+"Это сообщение рассказчика."
+"На фоне какой-то олень, являющийся персонажем. Давайте послушаем, что он скажет."
+owl "У-ху... Ху-хуу... У меня такая хорошая спальня."
+
+"А теперь новое лицо!"
+mark craig_enter
+craig _ enter middle_left "Ну и каков член на вкус?"
+if seeing_craig_first_time:
+	owl "Это жожореференс?"
+else:
+	owl "Так и не понял."
+
+owl _ leave ""
+craig _ leave ""
+
+"Тестовый выбор, ни на что не влияющий:"
+choice:
+	"Выбор 1":
+		"Вы выбрали первый вариант."
+	"Выбор 2":
+		"Вы выбрали второй вариант."
+	"Рита неплохо рисует":
+		"Что правда - то правда."
+
+owl _ enter middle ""
+craig _ enter right ""
+"Тестовый выбор с прогрессией:"
+mark start
+owl "Так и чё говоришь?"
+craig pog "Pooooog!"
+
+if seeing_craig_first_time:
+	set seeing_craig_first_time false
+	choice:
+		"*спросить ещё раз*":
+			jump start
+		"*продолжить диалог*":
+			owl "Ты не создаёшь впечатление адекватного собеседника."
+			craig _ "..."
+else:
+	choice:
+		"*спросить ещё раз*":
+			jump start
+		"*продолжить диалог*":
+			owl "А почему ты маленький?"
+			craig _ "Я удаленький."
+			owl "Ого, ты сказал что-то осмысленное."
+		"*сломать себе рог, чтобы устрашить его*":
+			owl broken "AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+			craig _ "И чё?"
+			owl "..."
+			craig pog ""
+			"Неловкая ситуация..."
+			jump ending_scene
+
+craig _ leave "Ыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыыы"
+owl "..."
+owl _ leave ""
+
+mark ending_scene
+transition fade_out
+background bedroom fade_out
+#

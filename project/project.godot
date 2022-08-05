@@ -94,7 +94,7 @@ config/icon="res://icon.png"
 
 LastOpenedFiles="*res://addons/file-editor/scripts/LastOpenedFiles.gd"
 Save="*res://src/singletons/Save.gd"
-Preloader="*res://src/singletons/Preloader.tscn"
+Preloader="*res://assets/Preloader.tscn"
 Config="*res://src/singletons/Config.gd"
 Global="*res://src/singletons/Global.gd"
 
