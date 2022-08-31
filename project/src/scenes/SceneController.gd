@@ -1,9 +1,9 @@
 class_name SceneController
 extends Node2D
 
-signal sceneLoaded_
+signal scene_loaded
 
-onready var currScene := $CurrentScene
+onready var curr_scene := $CurrentScene
 
 
 
@@ -11,13 +11,13 @@ func _ready() -> void:
 	pass
 
 
-func changeCurrentScene(scene : PackedScene):
-	if(!scene):
-		Global.printError([self, "Trying to change to null scene."])
+func change_current_scene(scene: PackedScene):
+	if not scene:
+		Global.error("Trying to change to null scene.")
 	else:
-		for child in currScene.get_children():
+		for child in curr_scene.get_children():
 			child.queue_free()
 		var node := scene.instance()
 		self.add_child(node, true)
 		yield(node, "ready")
-		emit_signal("sceneLoaded_")
+		emit_signal("scene_loaded")

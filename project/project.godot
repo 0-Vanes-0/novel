@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/file-editor/scripts/CSVEditor.gd"
 }, {
+"base": "Node",
+"class": "Character",
+"language": "GDScript",
+"path": "res://assets/characters/Character.gd"
+}, {
 "base": "HTTPRequest",
 "class": "GoogleTranslateAPI",
 "language": "GDScript",
@@ -23,11 +28,18 @@ _global_script_classes=[ {
 "class": "SceneController",
 "language": "GDScript",
 "path": "res://src/scenes/SceneController.gd"
+}, {
+"base": "Node",
+"class": "TextResource",
+"language": "GDScript",
+"path": "res://assets/texts/TextResource.gd"
 } ]
 _global_script_class_icons={
 "CSVEditor": "",
+"Character": "",
 "GoogleTranslateAPI": "",
-"SceneController": ""
+"SceneController": "",
+"TextResource": ""
 }
 
 [application]
@@ -39,7 +51,8 @@ config/icon="res://icon.png"
 [autoload]
 
 LastOpenedFiles="*res://addons/file-editor/scripts/LastOpenedFiles.gd"
-Preloader="*res://src/singletons/Preloader.gd"
+Save="*res://src/singletons/Save.gd"
+Preloader="*res://assets/Preloader.tscn"
 Config="*res://src/singletons/Config.gd"
 Global="*res://src/singletons/Global.gd"
 
@@ -48,10 +61,10 @@ Global="*res://src/singletons/Global.gd"
 window/size/width=1920
 window/size/height=1080
 window/size/resizable=false
-window/size/test_width=1280
-window/size/test_height=720
+window/size/test_width=640
+window/size/test_height=480
 window/stretch/mode="2d"
-window/stretch/aspect="expand"
+window/stretch/aspect="keep"
 
 [editor_plugins]
 

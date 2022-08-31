@@ -1,0 +1,19 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://src/singletons/Preloader.gd" type="Script" id=1]
+[ext_resource path="res://src/objects/SoundPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/scenes/SceneController.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/scenes/menus/MainMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/audios/sfx/cat-maaaow.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/audios/sfx/cat-angry-mreeow.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/audios/sfx/cat-mrrr-louder.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/audios/sfx/cat-muuaaw.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/audios/music/test_music.mp3" type="AudioStream" id=9]
+
+[node name="Preloader" type="Node"]
+script = ExtResource( 1 )
+main_menu = ExtResource( 4 )
+scene_controller = ExtResource( 3 )
+sound_player = ExtResource( 2 )
+music_resources = [ ExtResource( 9 ) ]
+sound_resources = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ) ]
