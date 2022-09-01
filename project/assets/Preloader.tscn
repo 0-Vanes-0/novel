@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://src/singletons/Preloader.gd" type="Script" id=1]
 [ext_resource path="res://src/objects/SoundPlayer.tscn" type="PackedScene" id=2]
@@ -9,11 +9,21 @@
 [ext_resource path="res://assets/audios/sfx/cat-mrrr-louder.wav" type="AudioStream" id=7]
 [ext_resource path="res://assets/audios/sfx/cat-muuaaw.wav" type="AudioStream" id=8]
 [ext_resource path="res://assets/audios/music/test_music.mp3" type="AudioStream" id=9]
+[ext_resource path="res://assets/sprites/backgrounds/kitchen.jpg" type="Texture" id=10]
+[ext_resource path="res://assets/sprites/backgrounds/no_background.png" type="Texture" id=11]
+[ext_resource path="res://assets/sprites/backgrounds/bedroom.png" type="Texture" id=12]
+[ext_resource path="res://assets/character_resources/craig.tres" type="Resource" id=13]
+[ext_resource path="res://assets/character_resources/koichi.tres" type="Resource" id=14]
+[ext_resource path="res://assets/novel_texts/test_chapter.tres" type="Resource" id=15]
+[ext_resource path="res://assets/character_resources/jotaro.tres" type="Resource" id=16]
 
 [node name="Preloader" type="Node"]
 script = ExtResource( 1 )
 main_menu = ExtResource( 4 )
 scene_controller = ExtResource( 3 )
 sound_player = ExtResource( 2 )
+text_resources = [ ExtResource( 15 ) ]
+character_resources = [ ExtResource( 13 ), ExtResource( 16 ), ExtResource( 14 ) ]
 music_resources = [ ExtResource( 9 ) ]
 sound_resources = [ ExtResource( 6 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 8 ) ]
+background_resources = [ ExtResource( 11 ), ExtResource( 10 ), ExtResource( 12 ) ]

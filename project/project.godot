@@ -14,10 +14,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/file-editor/scripts/CSVEditor.gd"
 }, {
-"base": "Node",
+"base": "Resource",
 "class": "Character",
 "language": "GDScript",
-"path": "res://assets/characters/Character.gd"
+"path": "res://assets/character_resources/Character.gd"
 }, {
 "base": "HTTPRequest",
 "class": "GoogleTranslateAPI",
@@ -29,10 +29,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/scenes/SceneController.gd"
 }, {
-"base": "Node",
+"base": "Resource",
 "class": "TextResource",
 "language": "GDScript",
-"path": "res://assets/texts/TextResource.gd"
+"path": "res://assets/novel_texts/TextResource.gd"
 } ]
 _global_script_class_icons={
 "CSVEditor": "",

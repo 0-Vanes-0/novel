@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://assets/sprites/characters/koichi.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/characters/no_character.png" type="Texture" id=2]
+[ext_resource path="res://assets/sprites/characters/koichi_up.png" type="Texture" id=3]
+[ext_resource path="res://assets/character_resources/Character.gd" type="Script" id=4]
+
+[resource]
+script = ExtResource( 4 )
+id = "koichi"
+display_name = "Вадим"
+default_image = "_"
+images = {
+"_": ExtResource( 2 ),
+"default": ExtResource( 1 ),
+"up": ExtResource( 3 )
+}

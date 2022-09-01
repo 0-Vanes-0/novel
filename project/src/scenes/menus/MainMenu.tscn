@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/scenes/menus/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/themes/menu_theme.tres" type="Theme" id=2]
-[ext_resource path="res://assets/sprites/805312.jpg" type="Texture" id=3]
+[ext_resource path="res://assets/sprites/backgrounds/titleBackground.jpg" type="Texture" id=3]
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -17,8 +17,6 @@ anchor_bottom = 1.0
 texture = ExtResource( 3 )
 expand = true
 stretch_mode = 7
-flip_h = true
-flip_v = true
 
 [node name="LoadingLabel" type="Label" parent="."]
 margin_left = 64.0
