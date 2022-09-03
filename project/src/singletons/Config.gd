@@ -33,7 +33,7 @@ func _ready() -> void:
 	settings = Save.load_settings()
 	if settings.empty():
 		settings = DEFAULT_SETTINGS.duplicate(true)
-		Global.info(self, "Saving settings done! Retuned %s" 
+		Global.info(self, "Saving NEW settings done! Retuned %s" 
 				%[Global.parse_error(Save.store_settings(settings))])
 	Global.info(self, "Current settings " + String(settings))
 

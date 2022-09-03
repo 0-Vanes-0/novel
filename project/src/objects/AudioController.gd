@@ -6,8 +6,9 @@ onready var _music_player := $MusicPlayer
 
 func _ready() -> void:
 	_music_player.stream = Preloader.musics["test_music"]
-	_music_player.volume_db = -10.0
-	_music_player.play()
+	_music_player.volume_db = -20.0
+	if Config.get_setting("Audio", "music_on") == true:
+		_music_player.play()
 
 
 func play_sound(sound: AudioStream):

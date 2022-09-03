@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://TextBox/SkipButton.gd" type="Script" id=1]
+[ext_resource path="res://src/objects/SkipButton.gd" type="Script" id=1]
 
 [node name="SkipButton" type="Button"]
 self_modulate = Color( 0.678431, 0.678431, 0.678431, 0.67451 )

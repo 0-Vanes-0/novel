@@ -112,17 +112,17 @@ class DialogueScript:
 
 
 ## Reads a text file and returns its content.
-func read_file_content(path: String) -> String:
-	var file := File.new()
-
-	if not file.file_exists(path):
-		push_error("Could not find the script with path: %s" % path)
-		return ""
-
-	file.open(path, File.READ)
-	var script := file.get_as_text()
-	file.close()
-	return script
+#func read_file_content(path: String) -> String:
+#	var file := File.new()
+#
+#	if not file.file_exists(path):
+#		push_error("Could not find the script with path: %s" % path)
+#		return ""
+#
+#	file.open(path, File.READ)
+#	var script := file.get_as_text()
+#	file.close()
+#	return script
 
 
 ## Turns the `input_text` into an array of `Token` objects.

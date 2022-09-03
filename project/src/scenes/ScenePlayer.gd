@@ -1,6 +1,6 @@
-## Loads and plays a scene's dialogue sequences, delegating to other nodes to display images or text.
 class_name ScenePlayer
 extends Node
+# Loads and plays a scene's dialogue sequences, delegating to other nodes to display images or text.
 
 signal scene_finished
 signal restart_requested
@@ -9,7 +9,7 @@ signal transition_finished
 const KEY_END_OF_SCENE := -1
 const KEY_RESTART_SCENE := -2
 
-## Maps transition keys to a corresponding function to call.
+# Maps transition keys to a corresponding function to call.
 const TRANSITIONS := {
 	fade_in = "_appear_async",
 	fade_out = "_disappear_async",
@@ -19,8 +19,9 @@ var _scene_data := {}
 
 onready var _text_box := $TextBox
 onready var _character_displayer := $CharacterDisplayer
-onready var _anim_player: AnimationPlayer = $FadeAnimationPlayer
+onready var _anim_player: AnimationPlayer = $AnimationPlayer
 onready var _background := $Background
+
 
 
 func run_scene() -> void:
@@ -46,16 +47,21 @@ func run_scene() -> void:
 				yield(_character_displayer, "display_finished")
 		
 		# Normal text reply.
-		if "line" in node:
+		if "line" in node: # TODO: skip if line is empty!!!
 			_text_box.display(node.line, character.display_name)
 			yield(_text_box, "next_requested")
 			key = node.next
 		
 		# Transition animation.
 		elif "transition" in node:
-			if node.transition != "":
-				call(TRANSITIONS[node.transition])
+			if node.transition == "fade_in":
+				_appear_async()
 				yield(self, "transition_finished")
+			
+			elif node.transition == "fade_out":
+				_disappear_async()
+				yield(self, "transition_finished")
+			
 			key = node.next
 		
 		# Manage variables
@@ -122,7 +128,7 @@ func run_scene() -> void:
 			key = node.next
 
 	_character_displayer.hide()
-	emit_signal("scene_finished")
+	emit_signal("scene_finished", "empty_scene") # TODO: get next scene from script!!!
 
 
 func load_scene(dialogue: SceneTranspiler.DialogueTree) -> void:
@@ -145,8 +151,8 @@ func _disappear_async() -> void:
 
 
 ## Saves a dictionary representing a scene to the disk using `var2str`.
-func _store_scene_data(data: Dictionary, path: String) -> void:
-	var file := File.new()
-	file.open(path, File.WRITE)
-	file.store_string(var2str(_scene_data))
-	file.close()
+#func _store_scene_data(data: Dictionary, path: String) -> void:
+#	var file := File.new()
+#	file.open(path, File.WRITE)
+#	file.store_string(var2str(_scene_data))
+#	file.close()

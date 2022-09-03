@@ -1,5 +1,4 @@
 extends Node
-
 # This is script which manages save files (player.dat and settings.cfg)
 
 #onready var _PASSWORD := String("sexisamyth").sha256_buffer()

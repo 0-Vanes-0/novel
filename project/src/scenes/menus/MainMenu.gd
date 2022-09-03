@@ -49,10 +49,9 @@ func _on_focus_changed(control: Control) -> void:
 
 
 func _on_PlayButton_pressed() -> void:
-	Config.settings["Audio"]["music_on"] = true
+	Config.settings["Audio"]["music_on"] = false
 	Save.store_settings(Config.settings)
-#	Global.set_player_variable("saved_scene", "anim(e)_test")
-#	Global.set_player_variable("seeing_craig_first_time", true)
+	Global.set_player_variable("saved_scene", "empty_scene")
 #	if not Global.get_player_variable("saved_scene"):
 #		Global.set_player_variable("saved_scene", "empty_scene") #"empty_scene"
 	get_tree().change_scene_to(Preloader.scene_controller)

@@ -16,4 +16,4 @@ theme = ExtResource( 3 )
 text = "Здесь пока ничего нет.
 Можете нажимать Enter, чтобы были звуки котеек~"
 
-[node name="SoundController" parent="." instance=ExtResource( 1 )]
+[node name="AudioController" parent="." instance=ExtResource( 1 )]
