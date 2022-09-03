@@ -39,7 +39,9 @@ var symbol_regex := RegEx.new()
 
 
 func _init() -> void:
-	symbol_regex.compile("[_a-zA-Z0-9]")
+	var err = symbol_regex.compile("[_a-zA-Z0-9]")
+	if err != OK:
+		push_error("symbol_regex.compile([_a-zA-Z0-9]) returned error: %s" %[Global.parse_error(err)])
 
 
 ## Represents a single token.

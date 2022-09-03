@@ -5,6 +5,11 @@
 [resource]
 script = ExtResource( 1 )
 text = "#
-background no_background fade_in
+background bedroom fade_in
+transition fade_in
 \"...\"
+\"\"
+\"Тестовый текст\"
+transition fade_out
+background bedroom fade_out
 #"
