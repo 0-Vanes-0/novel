@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://assets/sprites/characters/no_character.png" type="Texture" id=2]
+[ext_resource path="res://assets/character_resources/Character.gd" type="Script" id=4]
+
+[resource]
+script = ExtResource( 4 )
+id = "narrator"
+display_name = "_"
+default_image = "_"
+images = {
+"_": ExtResource( 2 )
+}

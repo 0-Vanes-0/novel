@@ -14,7 +14,7 @@
 [ext_resource path="res://assets/sprites/backgrounds/bedroom.png" type="Texture" id=12]
 [ext_resource path="res://assets/character_resources/craig.tres" type="Resource" id=13]
 [ext_resource path="res://assets/character_resources/koichi.tres" type="Resource" id=14]
-[ext_resource path="res://assets/novel_texts/test_chapter.tres" type="Resource" id=15]
+[ext_resource path="res://assets/novel_texts/test_scene.tres" type="Resource" id=15]
 [ext_resource path="res://assets/character_resources/jotaro.tres" type="Resource" id=16]
 
 [node name="Preloader" type="Node"]

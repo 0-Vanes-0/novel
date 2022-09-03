@@ -79,6 +79,8 @@ func pause_game(pauseMenu: Control):
 func print_arr(array: Array):
 	print("    INFO_ARRAY vvvvv")
 	for i in range(array.size()):
+#		if i > 100: break
+		
 		if i < 10:
 			print("000", i, " - ", array[i])
 		elif i < 100:

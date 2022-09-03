@@ -104,6 +104,10 @@ func get_narrator() -> Character:
 	return _characters.get(NARRATOR_ID)
 
 
+func get_background(background_id: String) -> Texture:
+	return backgrounds.get(background_id, preload("res://assets/sprites/backgrounds/no_background.png"))
+
+
 func get_filename_from_path(path: String) -> String:
 	var start := path.find_last("/") + 1
 	var length := path.find_last(".") - start

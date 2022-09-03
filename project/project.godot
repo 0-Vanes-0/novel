@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://assets/character_resources/Character.gd"
 }, {
+"base": "Node",
+"class": "CharacterDisplayer",
+"language": "GDScript",
+"path": "res://src/scenes/CharacterDisplayer.gd"
+}, {
+"base": "VBoxContainer",
+"class": "ChoiceSelector",
+"language": "GDScript",
+"path": "res://src/objects/ChoiceSelector.gd"
+}, {
 "base": "HTTPRequest",
 "class": "GoogleTranslateAPI",
 "language": "GDScript",
@@ -29,6 +39,26 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/scenes/SceneController.gd"
 }, {
+"base": "Reference",
+"class": "SceneLexer",
+"language": "GDScript",
+"path": "res://src/parser/SceneLexer.gd"
+}, {
+"base": "Reference",
+"class": "SceneParser",
+"language": "GDScript",
+"path": "res://src/parser/SceneParser.gd"
+}, {
+"base": "Node",
+"class": "ScenePlayer",
+"language": "GDScript",
+"path": "res://src/scenes/ScenePlayer.gd"
+}, {
+"base": "Reference",
+"class": "SceneTranspiler",
+"language": "GDScript",
+"path": "res://src/parser/SceneTranspiler.gd"
+}, {
 "base": "Resource",
 "class": "TextResource",
 "language": "GDScript",
@@ -37,8 +67,14 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "CSVEditor": "",
 "Character": "",
+"CharacterDisplayer": "",
+"ChoiceSelector": "",
 "GoogleTranslateAPI": "",
 "SceneController": "",
+"SceneLexer": "",
+"SceneParser": "",
+"ScenePlayer": "",
+"SceneTranspiler": "",
 "TextResource": ""
 }
 
@@ -138,6 +174,11 @@ ui_end={
 "deadzone": 0.5,
 "events": [  ]
 }
+
+[network]
+
+limits/debugger_stdout/max_chars_per_second=10000
+limits/debugger_stdout/max_messages_per_frame=100
 
 [physics]
 
