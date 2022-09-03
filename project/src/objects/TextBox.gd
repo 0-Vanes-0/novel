@@ -10,10 +10,8 @@ signal choice_made(target_id)
 
 # Speed at which the characters appear in the text body in characters per second.
 export var display_speed := 20.0
-export var bbcode_text := "" setget set_bbcode_text
 
 #onready var _skip_button : Button = $SkipButton
-
 onready var _name_label: Label = $NameBackground/NameLabel
 onready var _name_background: TextureRect = $NameBackground
 onready var _rich_text_label: RichTextLabel = $RichTextLabel
@@ -79,12 +77,11 @@ func display_choice(choices: Array) -> void:
 
 
 func set_bbcode_text(text: String) -> void:
-	bbcode_text = text
 	if not is_inside_tree():
 		yield(self, "ready")
 	
 	_blinking_arrow.hide()
-	_rich_text_label.bbcode_text = bbcode_text
+	_rich_text_label.bbcode_text = text
 	# Required for the `_rich_text_label`'s  text to update and the code below to work.
 	call_deferred("_begin_dialogue_display")
 
@@ -104,6 +101,7 @@ func _begin_dialogue_display() -> void:
 func fade_in_async() -> void:
 	_anim_player.play("textbox_fade_in")
 	_anim_player.seek(0.0, true)
+	_rich_text_label.visible_characters = 0
 	yield(_anim_player, "animation_finished")
 
 

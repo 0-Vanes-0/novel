@@ -11,14 +11,16 @@ const KEY_RESTART_SCENE := -2
 
 var _scene_data := {}
 
-onready var _text_box := $TextBox
-onready var _character_displayer := $CharacterDisplayer
+onready var _text_box: TextureRect = $TextBox
+onready var _character_displayer: CharacterDisplayer = $CharacterDisplayer
 onready var _anim_player: AnimationPlayer = $AnimationPlayer
-onready var _background := $Background
+onready var _background: TextureRect = $Background
+onready var _restart_label: Label = $RestartLabel
 
 
 
 func run_scene() -> void:
+	_restart_label.hide()
 	var key = 0
 	while key != KEY_END_OF_SCENE:
 		var node: SceneTranspiler.BaseNode = _scene_data[key]
@@ -129,7 +131,9 @@ func run_scene() -> void:
 			key = node.next
 
 	_character_displayer.hide()
-	emit_signal("scene_finished", "empty_scene") # TODO: get next scene from script!!!
+	yield(get_tree().create_timer(1.0), "timeout")
+	_restart_label.show()
+#	emit_signal("scene_finished", "empty_scene") # TODO: get next scene from script!!!
 
 
 func load_scene(dialogue: SceneTranspiler.DialogueTree) -> void:

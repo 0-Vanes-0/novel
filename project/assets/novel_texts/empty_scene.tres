@@ -11,5 +11,8 @@ transition fade_in
 \"\"
 \"Тестовый текст\"
 transition fade_out
+transition fade_in
+\"И ещё!\"
+transition fade_out
 background bedroom fade_out
 #"
