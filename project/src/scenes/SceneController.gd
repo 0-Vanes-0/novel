@@ -22,7 +22,7 @@ func _ready() -> void:
 	_play_scene(Global.get_player_variable("saved_scene"))
 
 
-func _load_scripts():
+func _load_scripts(): # TODO: Починить рестарт сцены (не загружается заново скрипт)
 	_all_scenes.clear()
 	_all_scenes = Preloader.novel_texts.duplicate()
 	if not _all_scenes.keys().empty():

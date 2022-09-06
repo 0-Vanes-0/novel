@@ -17,7 +17,7 @@
 [ext_resource path="res://assets/novel_texts/test_scene.tres" type="Resource" id=15]
 [ext_resource path="res://assets/character_resources/jotaro.tres" type="Resource" id=16]
 [ext_resource path="res://assets/novel_texts/empty_scene.tres" type="Resource" id=17]
-[ext_resource path="res://src/scenes/ScenePlayer.tscn" type="PackedScene" id=18]
+[ext_resource path="res://src/scenes/scene_player/ScenePlayer.tscn" type="PackedScene" id=18]
 [ext_resource path="res://assets/character_resources/narrator.tres" type="Resource" id=19]
 
 [node name="Preloader" type="Node"]

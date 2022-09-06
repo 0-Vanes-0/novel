@@ -35,15 +35,15 @@ func run_scene() -> void:
 		
 		# Displaying a character.
 		if "character" in node:
-			var side: String = node.side if "side" in node else CharacterDisplayer.SIDE.LEFT
-			var animation: String = node.animation
 			var expression: String = node.expression
-			_character_displayer.display(character, side, expression, animation)
+			var animation: String = node.animation
+			var side: String = node.side
+			_character_displayer.display(character, expression, animation, side)
 			if not "line" in node:
 				yield(_character_displayer, "display_finished")
 		
 		# Normal text reply.
-		if "line" in node: # TODO: skip if line is empty!!!
+		if "line" in node:
 			if node.line != "":
 				_text_box.display(node.line, character.display_name)
 				yield(_text_box, "next_requested")
@@ -130,7 +130,6 @@ func run_scene() -> void:
 		else:
 			key = node.next
 
-	_character_displayer.hide()
 	yield(get_tree().create_timer(1.0), "timeout")
 	_restart_label.show()
 #	emit_signal("scene_finished", "empty_scene") # TODO: get next scene from script!!!

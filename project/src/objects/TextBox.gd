@@ -38,7 +38,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed(Config.BUTTONS.ENTER):
+	if event.is_action_pressed(Config.BUTTONS.ACCEPT):
 		advance_dialogue()
 
 
